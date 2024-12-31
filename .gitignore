@@ -1,4 +1,9 @@
-fabric/run/*
-forge/run/*
+fabric/run
+fabric/.gradle
+fabric/build
+
+forge/run
+forge/.gradle
+forge/build
 .idea
 .gradle
