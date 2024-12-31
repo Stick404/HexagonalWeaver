@@ -1,0 +1,1 @@
+/bulk/Codings/HexagonalWeaver/fabric/build/classes/java/main/com/mindlesstoys/stick404/fabric/HexagonalWeaverFabric.class:/bulk/Codings/HexagonalWeaver/fabric/build/classes/java/main/com/mindlesstoys/stick404/fabric/client/ExampleModFabricClient.class
