@@ -1,7 +1,5 @@
 package com.mindlesstoys.stick404.item;
 
-import at.petrak.hexcasting.api.addldata.ADHexHolder;
-import at.petrak.hexcasting.api.addldata.ADMediaHolder;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.api.casting.iota.ListIota;
@@ -10,35 +8,21 @@ import at.petrak.hexcasting.api.item.HexHolderItem;
 import at.petrak.hexcasting.api.item.IotaHolderItem;
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class MagicCloakItem extends ArmorItem implements HexHolderItem, IotaHolderItem {
-    ArmorMaterial MATERIAL = new MagicCloakMaterial();
     String IOTA_TAG = "hexagonal_weaver:iota";
 
     public MagicCloakItem(ArmorMaterial armorMaterial, Type type, Properties properties) {
         super(armorMaterial, type, properties);
-    }
-
-
-    static void initPackagedHexDiscovery() {
-        MediaDiscoveryHandler.addCustomPackagedHexDiscoverer(harness -> {
-            ItemStack maybeCloak = HexUtils.extend(harness.getCtx()).mediaworks$getForcedCastingStack();
-            if (maybeCloak == null) return null;
-            if (!maybeCloak.isOf(MediaworksItems.MAGIC_CLOAK.get())) return null;
-            // we only "discover" the cloak in contexts where it has been explicitly forced, so essentially in our own casts
-            ADHexHolder hexHolder = IXplatAbstractions.INSTANCE.findHexHolder(maybeCloak);
-            assert hexHolder != null;
-            ADMediaHolder mediaHolder = IXplatAbstractions.INSTANCE.findMediaHolder(maybeCloak);
-            return new PackagedHexData(hexHolder, mediaHolder);
-        });
     }
 
     @Override
@@ -52,7 +36,7 @@ public class MagicCloakItem extends ArmorItem implements HexHolderItem, IotaHold
     }
 
     @Override
-    public @Nullable List<Iota> getHex(ItemStack itemStack, ServerLevel serverLevel) {
+    public List<Iota> getHex(ItemStack itemStack, ServerLevel serverLevel) {
         Iota iota = readIota(itemStack, serverLevel);
         if (iota == null) return null;
         if (iota instanceof ListIota listIota) return List.of(listIota);
@@ -143,9 +127,10 @@ public class MagicCloakItem extends ArmorItem implements HexHolderItem, IotaHold
     public int getConsumptionPriority(ItemStack stack) {
         return HexHolderItem.super.getConsumptionPriority(stack);
     }
-
     //stupid fucking armor class...
-    public void appendHoverText(ItemStack stack, @Nullable ServerLevel serverLevel, List<Component> tooltip, TooltipFlag context) {
-        IotaHolderItem.appendHoverText(this, stack, tooltip, context);
+
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, @NotNull List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+        IotaHolderItem.appendHoverText(this, itemStack, list, tooltipFlag);
     }
 }

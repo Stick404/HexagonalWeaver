@@ -1,5 +1,7 @@
 package com.mindlesstoys.stick404.mixin.cloak;
 
+import com.mindlesstoys.stick404.casting.logic.CloakTest;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Shadow;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
@@ -8,18 +10,27 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin {
     @Shadow
     public abstract boolean isInvulnerableTo(DamageSource arg);
 
+    @Shadow public abstract Iterable<ItemStack> getArmorSlots();
+
     @Unique
-    private DamageSource lastSource;
+    private DamageSource hexagonal_weaver$lastSource;
 
     @Inject(method = "actuallyHurt", at = @At("HEAD"))
     private void captureDamageSource(DamageSource source, float amount, CallbackInfo ci) {
-        this.lastSource = source;
+        this.hexagonal_weaver$lastSource = source;
+    }
+
+    @Inject(method = "hurt", at = @At("HEAD"))
+    private void runCloackCheck(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir){
+        Iterable<ItemStack> x = this.getArmorSlots();
+        x.forEach(armor -> new CloakTest().cloakTest(armor,this));
     }
 
     //Media Shield
