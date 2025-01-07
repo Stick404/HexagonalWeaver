@@ -6,6 +6,9 @@
   "client": [
   ],
   "mixins": [
+    "cloak.CastingContextMixin",
+    "cloak.LivingEntityMixin",
+    "cloak.PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

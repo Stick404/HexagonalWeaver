@@ -10,12 +10,12 @@ import at.petrak.hexcasting.api.casting.math.HexPattern
 object OpBreakPattern : ConstMediaAction {
     override val argc = 1
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> { //most of this code was taken from Hex Bound
-        var pattern = args.getPattern(0, argc)
-        var newStartDirt = pattern.angles.dropLast(1).fold(pattern.startDir) { dir, angle -> dir.rotatedBy(angle) }
-        var newDirList = pattern.angles.dropLast(1)
+        val pattern = args.getPattern(0, argc)
+        val patternAng = pattern.angles.dropLast(1)
+        val newStartDirt = patternAng.fold(pattern.startDir) { dir, angle -> dir.rotatedBy(angle) }
 
         return listOf(
-            PatternIota(HexPattern(pattern.startDir,newDirList.toMutableList())),
+            PatternIota(HexPattern(pattern.startDir, patternAng.toMutableList())),
             PatternIota(HexPattern(newStartDirt))
         )
     }

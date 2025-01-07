@@ -16,8 +16,9 @@ object ReversePattern : OperatorBasic(1, IotaMultiPredicate.all(IotaPredicate.of
         if (startIota is PatternIota) {
             val patternNorm = startIota.pattern
             val patternRev = patternNorm.angles.reversed().toMutableList()
+            var newStartDirt = patternNorm.angles.fold(patternNorm.startDir) { dir, angle -> dir.rotatedBy(angle) }
 
-            out.add(0,PatternIota(HexPattern(patternNorm.startDir, patternRev)))
+            out.add(0,PatternIota(HexPattern(newStartDirt, patternRev)))
             return out
         }
         else {

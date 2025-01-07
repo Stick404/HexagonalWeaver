@@ -5,7 +5,6 @@ import at.petrak.hexcasting.api.casting.arithmetic.Arithmetic.*
 import at.petrak.hexcasting.api.casting.arithmetic.engine.InvalidOperatorException
 import at.petrak.hexcasting.api.casting.arithmetic.operator.Operator
 import at.petrak.hexcasting.api.casting.arithmetic.operator.Operator.Companion.downcast
-import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBinary
 import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorUnary
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate
@@ -13,13 +12,9 @@ import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.PatternIota
 import at.petrak.hexcasting.api.casting.math.HexPattern
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes.PATTERN
 import com.mindlesstoys.stick404.casting.arithmetic.actions.MergePatterns
 import com.mindlesstoys.stick404.casting.arithmetic.actions.ReversePattern
-import java.util.function.BinaryOperator
-import java.util.function.UnaryOperator
-import java.util.regex.Pattern
 
 object PatternArithmetic : Arithmetic {
     private val ACCEPTS: IotaMultiPredicate = IotaMultiPredicate.all(IotaPredicate.ofType(PATTERN))

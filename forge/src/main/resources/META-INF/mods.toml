@@ -33,3 +33,17 @@ mandatory = true
 versionRange = "[9.2.14,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.hexagonal_weaver]]
+modId = "inline"
+mandatory = true
+versionRange = "[1.0.2-51,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hexagonal_weaver]]
+modId = "architectury"
+mandatory = true
+versionRange = "[9.2.14,)"
+ordering = "AFTER"
+side = "BOTH"

@@ -45,8 +45,9 @@ dependencies {
     // // Hex Casting Dependencies
     modCompileOnly "at.petra-k.paucal:paucal-forge-${minecraft_version}:${paucal_version}"
     modCompileOnly "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE"
-
     runtimeOnly "thedarkcolour:kotlinforforge:$project.forge_kotlin_version"
+    modApi "com.samsthenerd.inline:inline-forge:$minecraft_version-$inline_version"
+    modImplementation "at.petra-k.paucal:paucal-forge-${minecraft_version}:${paucal_version}"
 }
 
 processResources {
