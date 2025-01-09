@@ -1,0 +1,14 @@
+Welcome to the plans.txt, this will be a large bundle 'o' ideas, plans, and things that need to be done:
+
+Things done:
+-Nothing, lmao
+
+Things needing done:
+-Pattern Editing (still need to add these to the book, and clean them up)
+-Magic Cloak (mostly a texture/model, and maybe the enchants)
+
+Things not done:
+-Some Pattern Editing
+-Magic Cloak Enchants
+-Macula
+-Astral Projection
