@@ -35,7 +35,7 @@ class CloakTest {
             val sPlayer = player as ServerPlayer
 
             val instrs: List<Iota> = hexItem.getHex(item,sPlayer.serverLevel())!!
-            val ctx = CloakCastEnv(sPlayer,null)
+            val ctx = CloakCastEnv(sPlayer,sPlayer.usedItemHand)
             var harness = CastingVM.empty(ctx)
             var clientView = harness.queueExecuteAndWrapIotas(instrs, sPlayer.serverLevel())
 

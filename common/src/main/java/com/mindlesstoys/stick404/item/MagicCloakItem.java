@@ -40,7 +40,7 @@ public class MagicCloakItem extends ArmorItem implements HexHolderItem, IotaHold
     public List<Iota> getHex(ItemStack itemStack, ServerLevel serverLevel) {
         Iota iota = readIota(itemStack, serverLevel);
         if (iota == null) return null;
-        if (iota instanceof ListIota listIota) return Lists.newArrayList(listIota);
+        if (iota instanceof ListIota listIota) return Lists.newArrayList(listIota.getList());
         return List.of(iota);
     }
 
