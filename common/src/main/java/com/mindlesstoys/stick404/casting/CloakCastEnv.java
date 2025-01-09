@@ -13,26 +13,27 @@ import net.minecraft.world.InteractionHand;
 
 import java.util.List;
 
-public class CloakCastEnv extends PlayerBasedCastEnv {
+
+public class CloakCastEnv extends PackagedItemCastEnv {
     public CloakCastEnv(ServerPlayer caster, InteractionHand castingHand) {
         super(caster, castingHand);
     }
 
-    //@Override
-    //public void postExecution(CastResult result) {
-    //    super.postExecution(result);
+    @Override
+    public void postExecution(CastResult result) {
+        super.postExecution(result);
 
-    //    if (result.component1() instanceof PatternIota patternIota) {
-    //        var packet = new MsgNewSpiralPatternsS2C(
-    //                this.caster.getUUID(), List.of(patternIota.getPattern()), 140
-    //        );
-    //        IXplatAbstractions.INSTANCE.sendPacketToPlayer(this.caster, packet);
-    //        IXplatAbstractions.INSTANCE.sendPacketTracking(this.caster, packet);
-    //    }
-    //}
+        if (result.component1() instanceof PatternIota patternIota) {
+            var packet = new MsgNewSpiralPatternsS2C(
+                    this.caster.getUUID(), List.of(patternIota.getPattern()), 140
+            );
+            IXplatAbstractions.INSTANCE.sendPacketToPlayer(this.caster, packet);
+            IXplatAbstractions.INSTANCE.sendPacketTracking(this.caster, packet);
+        }
+    }
 
     @Override
-    protected long extractMediaEnvironment(long cost, boolean simulate) {
+    public long extractMediaEnvironment(long cost, boolean simulate) {
         if (this.caster.isCreative())
             return 0;
 

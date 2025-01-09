@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.item.HexHolderItem;
 import at.petrak.hexcasting.api.item.IotaHolderItem;
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
+import com.google.common.collect.Lists;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -39,7 +40,7 @@ public class MagicCloakItem extends ArmorItem implements HexHolderItem, IotaHold
     public List<Iota> getHex(ItemStack itemStack, ServerLevel serverLevel) {
         Iota iota = readIota(itemStack, serverLevel);
         if (iota == null) return null;
-        if (iota instanceof ListIota listIota) return List.of(listIota);
+        if (iota instanceof ListIota listIota) return Lists.newArrayList(listIota);
         return List.of(iota);
     }
 

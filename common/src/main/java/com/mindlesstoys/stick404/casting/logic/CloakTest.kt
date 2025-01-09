@@ -34,19 +34,18 @@ class CloakTest {
             val hexItem = item.item as MagicCloakItem
             val sPlayer = player as ServerPlayer
 
-            val ctx = CloakCastEnv(sPlayer,null)
             val instrs: List<Iota> = hexItem.getHex(item,sPlayer.serverLevel())!!
+            val ctx = CloakCastEnv(sPlayer,null)
             var harness = CastingVM.empty(ctx)
-            //var clientView = harness.queueExecuteAndWrapIotas(instrs, sPlayer.serverLevel())
-            var clientView = harness.queueExecuteAndWrapIota(instrs.get(0), sPlayer.serverLevel())
+            var clientView = harness.queueExecuteAndWrapIotas(instrs, sPlayer.serverLevel())
 
-            val patterns: List<HexPattern>? = instrs.stream()
-                .filter { i -> i is PatternIota }
-                .map { i -> (i as PatternIota).pattern }
-                .toList()
-            val packet = MsgNewSpiralPatternsS2C(sPlayer.uuid, patterns, 140)
-            IXplatAbstractions.INSTANCE.sendPacketToPlayer(sPlayer, packet)
-            IXplatAbstractions.INSTANCE.sendPacketTracking(sPlayer, packet)
+            //val patterns: List<HexPattern>? = instrs.stream()
+            //    .filter { i -> i is PatternIota }
+            //    .map { i -> (i as PatternIota).pattern }
+            //    .toList()
+            //val packet = MsgNewSpiralPatternsS2C(sPlayer.uuid, patterns, 140)
+            //IXplatAbstractions.INSTANCE.sendPacketToPlayer(sPlayer, packet)
+            //IXplatAbstractions.INSTANCE.sendPacketTracking(sPlayer, packet)
 
 
             if (clientView.resolutionType.success) { //clientView.resolutionType.success
